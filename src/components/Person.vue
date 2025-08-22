@@ -1,46 +1,44 @@
 <template>
     <div class="person">
-        <h2>姓名：{{ name }}</h2>
-        <h2>年龄：{{ age }}</h2>
-        <h2>地址：{{ address }}</h2>
-        <button @click="changeName">修改姓名</button>
-        <button @click="changeAge">修改年龄</button>
-        <button @click="showTel">查看联系方式</button>
+        <h2>汽车信息：一辆{{ car.beand }}车,价值{{ car.price }}万</h2>
+        <button @click="changePricep">修改汽车的价格</button>
+        <br>
+        <h2>游戏列表</h2>
+        <ul>
+            <li v-for="game in games" :key="game.id">{{game.name}}</li>
+        </ul>
+        <button @click="changeFirstGame">修改第一个游戏名字</button>
     </div>
 </template>
 
-<script lang="ts" setup name="Person">
-import { ref } from 'vue'
-// 数据
-let name = ref('张三')  // 使用 ref 创建响应式数据
-let age = ref(18)     // 使用 ref 创建响应式数据
-let tel = '13477885640'  // tel不是响应式的
-let address = '广东广州天河区时尚天河广场'
 
-console.log(1,name)
-console.log(2,age)
-console.log(3,tel)
-console.log(4,address)
+<script lang="ts" setup name="Person">
+import { ref ,reactive} from 'vue'
+
+
+// 数据
+let car = ref({ beand: '奔驰', price: 100 })
+let games = ref( [
+{id:'aysdiedhbei01',name:'和平精英',},
+{id:'aysdiedhbei02',name:'王者荣耀',},
+{id:'aysdiedhbei03',name:'英雄联盟',},
+])
+
+
+
+
 
 // 方法
-function changeName() {
-    name.value = 'Jason'      // 正确修改响应式数据：使用 .value
-    console.log(name.value)     // 访问响应式数据的值
+function changePricep() {
+    car.value.price += 10
+    console.log(car.value.price)
 }
 
-function changeAge() {
-    age.value += 1   // 正确修改响应式数据：使用 .value
-    console.log(age.value)  // 访问响应式数据的值
+function changeFirstGame(){
+    games.value[0].name = '绝地求生'
 }
 
-function showTel() {
-    alert(tel)
-    console.log(tel)
-}
-// 在 <script setup> 中，所有顶层的变量和函数会自动暴露给模板
-// 不需要手动 return
 </script>
-
 
 
 
@@ -56,5 +54,8 @@ function showTel() {
 button {
     margin: 0 5px;
     box-shadow: 0 0 5px;
+}
+li{
+    font-size: 20px;
 }
 </style>

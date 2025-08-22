@@ -2,15 +2,16 @@ import { fileURLToPath, URL } from 'node:url'
 
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import VueDevTools from 'vite-plugin-vue-devtools'
+import vueDevTools from 'vite-plugin-vue-devtools'
 
 
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
     vue(),
-    VueDevTools({
-      launchEditor: 'cursor', // Specify 'cursor' as the desired editor
+    vueDevTools({
+      // 启用文件跳转功能，指定 Cursor 编辑器
+      launchEditor: 'cursor',
     }),
   ],
   resolve: {
