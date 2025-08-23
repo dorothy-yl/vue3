@@ -1,14 +1,15 @@
 <template>
     <div class="person">
-        <h1>情况三：监视reactive所定义的【对象类型】数据</h1>
+        <h1>情况四：监视【ref】或【reactive】定义的【对象类型】数据中的某个属性</h1>
         <h2>姓名：{{ person.name }}</h2>
         <h2>年龄：{{ person.age }}</h2>
+        <h2>汽车：{{ person.car.c1 }},{{ person.car.c2 }}</h2>
+        <h2>汽车：</h2>
         <button @click="changeName">修改名字</button>
         <button @click="changeAge">修改年龄</button>
-        <button @click="changePerson">修改整个人</button>
-        <hr>
-        <h2>测试：{{ obj.a.b.c }}</h2>
-        <button @click="test">修改obj.a.b.c</button>
+        <button @click="changeC1">修改c1</button>
+        <button @click="changeC2">修改c2</button>
+        <button @click="changeCar">修改汽车</button>
     </div>
 </template>
 
@@ -19,42 +20,42 @@ import { reactive, watch } from 'vue'
 // 数据
 let person = reactive({
     name: '张三',
-    age: 18
+    age: 18,
+    car: {
+        c1: '奔驰',
+        c2: '宝马'
+    }
 })
 
-let obj = {
-    a:{
-        b:{
-            c:888
-        }
-    }
-}
+
 
 // 方法
 function changeName() {
     person.name += '~'
 }
-
 function changeAge() {
     person.age++
 }
-
-function changePerson() {
-   Object.assign(person,{name:'李四',age:80})
+function changeC1() {
+    person.car.c1 = '奥迪'
 }
-
-function test(){
-    obj.a.b.c = 888
+function changeC2() {
+    person.car.c2 = '大众'
 }
+function changeCar() {
+    person.car = { c1: '雅迪', c2: '艾玛' }
+}
+// 监视，情况四：监视响应式对象中的某个属性，且该属性时基本类型的，要写成函数式
+// watch(()=> person.name, (newValue, oldValue) => {
+//     console.log('person变化了', newValue, oldValue)
+// })
 
-// 监视，监视reactive所定义的【对象类型】数据,且默认开启深度监视的，且默认开启立即监视
-watch(person,(newValue,oldValue)=>{
-    console.log('person变化了',newValue,oldValue)
-})
 
-watch(obj,(newValue,oldValue)=>{
-    console.log('obj变化了',newValue,oldValue)
-})
+// 监视，情况四：监视响应式对象中的某个属性，且该属性是对象类型的，可以直接写，也能写函数，更推荐写函数
+watch(() => person.car, (newValue, oldValue) => {
+    console.log('person变化了', newValue, oldValue)
+}, { deep: true })
+
 </script>
 
 
