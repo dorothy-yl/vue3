@@ -1,51 +1,37 @@
 <template>
     <div class="person">
-        姓：<input type="text" v-model="firstName"><br>
-        名：<input type="text" v-model="lastName"><br>
-        <button @click="changeFullName">将全名改为li-si</button>
-        全名：<span>{{ fullName }}</span><br>
-        全名：<span>{{ fullName }}</span><br>
-        全名：<span>{{ fullName }}</span><br>
-        全名：<span>{{ fullName }}</span><br>
-        全名：<span>{{ fullName }}</span><br>
-        全名：<span>{{ fullName }}</span><br>
+        <h1>情况一：监视ref所定义的【基本类型】数据</h1>
+        <h2>当前求和为：{{ sum }}</h2>
+        <button @click="changeSum">点我sum加1</button>
     </div>
 </template>
 
 
 
 <script lang="ts" setup name="Person">
-import { ref, computed } from 'vue'
-
+import { ref, watch } from 'vue'
 // 数据
-let firstName = ref('zhang')
-let lastName = ref('san')
+let sum = ref(0)
+// 方法
+function changeSum() {
+    sum.value += 1
+}
 
-
-
-// 方法,这么定义的firstName是一个计算属性，且是只读的
-
-// let fullName = computed(() =>{
-//     console.log(1)
-//     return firstName.value.slice(0,1).toUpperCase() + firstName.value.slice(1) + '-' + lastName.value
-// })
-
-let fullName = computed({
-    get() {
-        return firstName.value.slice(0, 1).toUpperCase() + firstName.value.slice(1) + '-' + lastName.value
-    },
-    set(val) {
-        const [str1, str2] = val.split('-')
-        firstName.value = str1  
-        lastName.value = str2
+// 监视，情况一：监视ref所定义的【基本类型】数据
+const stopWatch = watch(sum, (newValue, oldValue) => {
+    console.log('sum变化了', newValue, oldValue)
+    if (newValue >= 10) {
+        stopWatch()
     }
 })
 
-function changeFullName() {
-    fullName.value = 'li-si'
 
-}
+
+
+
+
 </script>
+
 
 
 <style scoped>
