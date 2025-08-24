@@ -1,27 +1,19 @@
 <template>
-    <Person />
-   
+    <h2 ref="title2">你好</h2>
+    <button @click="showLog">测试</button>
+    <Person ref="ren"/>
 </template>
-m
 
-<script lang="ts">
-// JS或TS代码
+
+<script lang="ts" setup name= "App">
+import { ref } from 'vue'
 import Person from './components/Person.vue'
-
-export default {
-    // 组件名
-    name: 'App',
-    // 注册组件
-    components: { Person }
+let title2 = ref()
+let ren = ref()
+function showLog(){
+    // console.log(title2.value)
+    console.log(ren.value)
 }
+
+
 </script>
-
-<style scoped>
-/* 样式 */
-.app {
-    background-color: skyblue;
-    box-shadow: 0 0 10px;
-    border-radius: 10px;
-    padding: 20px;
-}
-</style>
