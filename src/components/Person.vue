@@ -1,59 +1,50 @@
 <template>
     <div class="person">
-        <h1>情况五：监视上述的多个数据</h1>
-        <h2>姓名：{{ person.name }}</h2>
-        <h2>年龄：{{ person.age }}</h2>
-        <h2>汽车：{{ person.car.c1 }},{{ person.car.c2 }}</h2>
-        <h2>汽车：</h2>
-        <button @click="changeName">修改名字</button>
-        <button @click="changeAge">修改年龄</button>
-        <button @click="changeC1">修改c1</button>
-        <button @click="changeC2">修改c2</button>
-        <button @click="changeCar">修改汽车</button>
+        <h2>需求：当水温达到60度，或者水位达到80，给服务器发请求</h2>
+        <h2>当前水温：{{ temp }}℃</h2>
+        <h2>当前水位：{{ height }}cm</h2>
+        <button @click="changeTemp">水温+10</button>
+        <button @click="changeHeight">水位+10</button>
     </div>
 </template>
 
 
 
 <script lang="ts" setup name="Person">
-import { reactive, watch } from 'vue'
+import { ref, watch, watchEffect } from 'vue'
+
+
 // 数据
-let person = reactive({
-    name: '张三',
-    age: 18,
-    car: {
-        c1: '奔驰',
-        c2: '宝马'
+let temp = ref(10)
+let height = ref(10)
+// 方法
+function changeTemp() {
+    temp.value += 10
+
+}
+function changeHeight() {
+    height.value += 10
+
+}
+
+
+// 监视
+// watch([temp, height], (value) => {
+//     // 从value中获取最新的水温和水位
+//     let [newTemp, newHeight] = value;
+//     // 逻辑
+//     if (newTemp >= 60 || newHeight >= 80) {
+//         console.log('给服务器发请求')
+//     }
+// })
+
+watchEffect(() => {
+    if (temp.value >= 60 || height.value >= 80) {
+        console.log('给服务器发请求')
     }
 })
 
 
-
-// 方法
-function changeName() {
-    person.name += '~'
-}
-function changeAge() {
-    person.age++
-}
-function changeC1() {
-    person.car.c1 = '奥迪'
-}
-function changeC2() {
-    person.car.c2 = '大众'
-}
-function changeCar() {
-    person.car = { c1: '雅迪', c2: '艾玛' }
-}
-
-
-
-watch([() => person.name, person.car], (newValue, oldValue) => {
-    console.log('person变化了', newValue, oldValue)
-}, { deep: true })
-// 情况五：监视上述的多个数据
-// 情况六：监视响应式对象中的某个属性，且该属性时基本类型的，要写成函数式
-// 情况七：监视响应式对象中的某个属性，且该属性时对象类型的，可以直接写，也能写函数，更推荐写函数
 
 </script>
 
