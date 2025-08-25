@@ -3,25 +3,39 @@
     <!-- 导航区 -->
     <ul>
       <li v-for="news in newsList" :key="news.id">
+        <button @click="showNewsDetail(news)">查看新闻</button>
         <RouterLink :to="`/news/detail/${news.id}/${news.title}/${news.content}`">{{ news.title }}</RouterLink>
       </li>
     </ul>
     <!-- 展示区 -->
-     <div class=" news-content">
-          <RouterView></RouterView>
-  </div>
+    <div class=" news-content">
+      <RouterView></RouterView>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts" name="News">
 import { reactive } from 'vue'
-import { RouterView, RouterLink } from 'vue-router'
+import { RouterView, RouterLink, useRouter } from 'vue-router'
 const newsList = reactive([
   { id: 1, title: '如何一夜暴富', content: '别白日做梦了，好好上班吧' },
   { id: 2, title: '如何学好前端', content: '每天坚持写代码' },
   { id: 3, title: '震惊！万万没想到', content: '今天居然能中奖' },
   { id: 4, title: '好消息！好消息！马上要开学了', content: '作业还没有写完' },
 ])
+
+
+const router = useRouter()
+
+interface NewsInter {
+  id: number,
+  title: string,
+  content: string
+}
+
+function showNewsDetail(news:NewsInter) {
+  router.push(`/news/detail/${news.id}/${news.title}/${news.content}`)
+}
 </script>
 
 <style scoped>

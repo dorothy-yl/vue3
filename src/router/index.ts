@@ -7,8 +7,12 @@ import News from '@/pages/News.vue'
 import Detail from '@/pages/Detail.vue'
 
 const router = createRouter({
-    history: createWebHashHistory(),
+    history: createWebHistory(),
     routes: [
+        {
+            path: '/',
+            redirect: '/home'
+        },
         {
             name: 'zhuye',
             path: '/home',

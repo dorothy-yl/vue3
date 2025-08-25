@@ -34,6 +34,16 @@ import Header from './components/Header.vue'
   font-size: 30px;
 }
 
+
+.navigate a.active{
+  background-color: #64967E !important;
+  color: #ffc268 !important;
+  font-weight: 900 !important;
+  text-shadow: 0 0 1px black !important;
+  font-family: 微软雅黑 !important;
+}
+
+
 .navigate {
   display: flex;
   justify-content: space-around;
@@ -52,15 +62,16 @@ import Header from './components/Header.vue'
   color: white;
   font-size: 18px;
   letter-spacing: 5px;
+  transition: all 0.3s ease;
 }
 
-.navigate a.xiaozhupeiqi {
-  background-color: #64967E;
-  color: #ffc268;
-  font-weight: 900;
-  text-shadow: 0 0 1px black;
-  font-family: 微软雅黑;
+.navigate a:hover {
+  background-color: #555;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
+
+
 
 .main-content {
   margin: 0 auto;
