@@ -10,6 +10,7 @@ const router = createRouter({
     history: createWebHistory(),
     routes: [
         {
+            // 重定向
             path: '/',
             redirect: '/home'
         },
