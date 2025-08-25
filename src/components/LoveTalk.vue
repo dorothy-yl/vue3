@@ -13,7 +13,10 @@
 
   const talkStore = useTalkStore()
   const {talkList} = storeToRefs(talkStore)
-  
+  talkStore.$subscribe((mutation,state)=>{
+    console.log('talkList被修改了',state.talkList)
+    localStorage.setItem('talkList',JSON.stringify(state.talkList))
+  })
   // 方法
   function getLoveTalk(){
     talkStore.getATalk()
