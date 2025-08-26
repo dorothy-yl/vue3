@@ -1,20 +1,20 @@
 <template>
   <input 
     type="text" 
-    :value="ming"
-    @input="emit('update:ming',(<HTMLInputElement>$event.target).value)"
+    :value="qwe"
+    @input="emit('update:qwe',(<HTMLInputElement>$event.target).value)"
   >
   <br>
   <input 
     type="text" 
-    :value="mima"
-    @input="emit('update:mima',(<HTMLInputElement>$event.target).value)"
+    :value="asd"
+    @input="emit('update:asd',(<HTMLInputElement>$event.target).value)"
   >
 </template>
 
 <script setup lang="ts" name="AtguiguInput">
-  defineProps(['ming','mima'])
-  const emit = defineEmits(['update:ming','update:mima'])
+  defineProps(['qwe','asd'])
+  const emit = defineEmits(['update:qwe','update:asd'])
 </script>
 
 <style scoped>

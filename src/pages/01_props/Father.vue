@@ -1,9 +1,9 @@
 <template>
   <div class="father">
-    <h3>父组件</h3>
-		<h4>汽车：{{ car }}</h4>
-		<h4 v-show="toy">子给的玩具：{{ toy }}</h4>
-		<Child :car="car" :sendToy="getToy"/>
+    <h2>父组件</h2>
+		<h2>汽车：{{ car }}</h2>
+		<h3 v-show="toy">子给的玩具：{{ toy }}</h3>
+		<Child :car="car" :send-Toy="getToy"/>
   </div>
 </template>
 

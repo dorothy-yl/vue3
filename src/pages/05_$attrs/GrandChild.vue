@@ -8,11 +8,16 @@
 		<h4>x：{{ x }}</h4>
 		<h4>y：{{ y }}</h4>
 		<button @click="updateA(6)">点我将爷爷那的a更新</button>
+		<br>
+		<button @click="updateB(10)">点我将爷爷那的b更新</button>
+		<br>
+		<button @click="updateC(10)">点我将爷爷那的c更新</button>
+
 	</div>
 </template>
 
 <script setup lang="ts" name="GrandChild">
-	defineProps(['a','b','c','d','x','y','updateA'])
+	defineProps(['a','b','c','d','x','y','updateA','updateB','updateC'])
 </script>
 
 <style scoped>

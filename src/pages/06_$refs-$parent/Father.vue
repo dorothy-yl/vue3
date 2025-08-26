@@ -2,6 +2,7 @@
 	<div class="father">
 		<h3>父组件</h3>
 		<h4>房产：{{ house }}</h4>
+		<h5>汽车：{{ car }}</h5>
 		<button @click="changeToy">修改Child1的玩具</button>
 		<button @click="changeComputer">修改Child2的电脑</button>
 		<button @click="getAllChild($refs)">让所有孩子的书变多</button>
@@ -11,7 +12,7 @@
 </template>
 
 <script setup lang="ts" name="Father">
-	import Child1 from './Child1.vue'
+	import Child1 from './Child1.vue' 
 	import Child2 from './Child2.vue'
 	import { ref,reactive } from "vue";
 	let c1 = ref()
@@ -33,6 +34,8 @@
 
 	// 数据
 	let house = ref(4)
+	let car = ref(5)
+
 	// 方法
 	function changeToy(){
 		c1.value.toy = '小猪佩奇'
@@ -47,7 +50,7 @@
 		}
 	}
 	// 向外部提供数据
-	defineExpose({house})
+	defineExpose({house,car})
 </script>
 
 <style scoped>
