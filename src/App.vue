@@ -1,38 +1,19 @@
 <template>
 	<div class="app">
-		<h2>姓名：{{ person.name }}</h2>
-		<h2>年龄：{{ person.age }}</h2>
-		<button @click="person.age += 1">修改年龄</button>
-		<hr>
-		<h2>{{ car2 }}</h2>
-		<button @click="car2.price += 10">点我价格+10</button>
+		<h2>{{ msg }}</h2>
+		<input type="text" v-model="msg">
 	</div>
 </template>
 
 <script setup lang="ts" name="App">
-	import { reactive,toRaw,markRaw } from "vue";
-	// import mockjs from 'mockjs'
+	import {ref} from 'vue'
+	import useMsgRef from './useMsgRef'
 
-	/* toRaw */
-	let person = reactive({
-		name:'tony',
-		age:18
-	})
-	// 用于获取一个响应式对象的原始对象
-	let rawPerson = toRaw(person)
-	// console.log('响应式对象',person)
-	// console.log('原始对象',rawPerson)
+	// 使用Vue提供的默认ref定义响应式数据，数据一变，页面就更新
+	// let msg = ref('你好')
 
-
-	/* markRaw */
-	let car = markRaw({brand:'奔驰',price:100})
-	let car2 = reactive(car)
-
-	console.log(car)
-	console.log(car2)
-
-	// let mockJs = markRaw(mockjs)
-
+	// 使用useMsgRef来定义一个响应式数据且有延迟效果
+	let {msg} = useMsgRef('你好',2000)
 
 </script>
 
